@@ -8,22 +8,23 @@ int blue;
 float[] back= new float [3];
 int cols, rows;
 int scl=30;
-int w=int(1920*1.455);
-int h=int(950);
+int w=int(1920*1.5);
+int h=int(900);
 float flying=0;;
 float[][] terrain;
+String file;
 //Arduino arduino;
 void setup()
 {
   fullScreen(P3D);
   noCursor();
-  
+  selectInput("Escoge el archivo MP3", "fileSelected");
   minim = new Minim(this);
   
   cols=w/scl;
   rows=h/scl;
   terrain=new float[cols][rows];
-  player = minim.loadFile("song.mp3");
+  player = minim.loadFile(file);
   frameRate(60);
   
   surface.setResizable(true);
@@ -33,6 +34,15 @@ void setup()
   arduino.pinMode(4,0);*/
 }
 
+void fileSelected(File selection) {
+  if (selection == null) {
+    println("Window was closed or the user hit cancel.");
+    exit();
+  } else {
+    println("User selected " + selection.getAbsolutePath());
+    file=selection.getAbsolutePath();
+  }
+}
 
 void draw()
 {
@@ -73,7 +83,7 @@ void draw()
     line( x1, 0.75*height + player.right.get(i)*50, width,height);
   }*/
   
-  flying-=(player.left.level()+player.right.level())/2*0.8;
+  flying-=(player.left.level()+player.right.level())/2*1.1;
   println(frameRate);
   float yoff=flying;
   for(int y=0;y<rows;y++){
@@ -96,8 +106,8 @@ void draw()
   for(int y=0;y<rows-1;y++){
     beginShape(TRIANGLE_STRIP);
     for(int x=0;x<cols;x++){
-      vertex(x*scl,y*scl, terrain[x][y]*(player.left.level()+player.right.level())/2*5);
-      vertex(x*scl,(y+1)*scl,terrain[x][y+1]*(player.left.level()+player.right.level())/2*5);
+      vertex(x*scl,y*scl, terrain[x][y]*(player.left.level()+player.right.level())/2*7);
+      vertex(x*scl,(y+1)*scl,terrain[x][y+1]*(player.left.level()+player.right.level())/2*7);
     }
     endShape();
   }
@@ -111,8 +121,8 @@ void draw()
   for(int y=0;y<rows-1;y++){
     beginShape(TRIANGLE_STRIP);
     for(int x=0;x<cols;x++){
-      vertex(x*scl,y*scl, terrain[x][y]*(player.left.level()+player.right.level())/2*5);
-      vertex(x*scl,(y+1)*scl,terrain[x][y+1]*(player.left.level()+player.right.level())/2*5);
+      vertex(x*scl,y*scl, terrain[x][y]*(player.left.level()+player.right.level())/2*7);
+      vertex(x*scl,(y+1)*scl,terrain[x][y+1]*(player.left.level()+player.right.level())/2*7);
     }
     endShape();
   }
