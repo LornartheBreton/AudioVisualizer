@@ -7,8 +7,8 @@ AudioPlayer player;
 //Arduino arduino;
 void setup()
 {
-  size(800, 600, P3D);
-  
+  fullScreen(P3D);
+  noCursor();
   
   minim = new Minim(this);
   
