@@ -84,7 +84,7 @@ void draw()
     line( x1, 0.75*height + player.right.get(i)*50, width,height);
   }*/
   
-  flying-=(player.left.level()+player.right.level())/2*1.1;
+  flying-=(player.left.level()+player.right.level())/2*1.2;
   println(frameRate);
   float yoff=flying;
   for(int y=0;y<rows;y++){
@@ -142,7 +142,10 @@ void draw()
   float rot = map(player.position(), 0, player.length(), 0, TWO_PI);
   rotateY(rot);
   rotateX(rot);
+  
   box(width/2*player.right.level());
+  
+  
   //ellipse(width/2, height/2,height*player.left.level(),width*player.right.level());
   // draw a line to show where in the song playback is currently located
  
