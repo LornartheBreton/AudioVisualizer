@@ -12,6 +12,7 @@ int w=int(1920*1.5);
 int h=int(900);
 float flying=0;;
 float[][] terrain;
+File song;
 String file;
 //Arduino arduino;
 void setup()
@@ -24,7 +25,7 @@ void setup()
   cols=w/scl;
   rows=h/scl;
   terrain=new float[cols][rows];
- 
+  //player = minim.loadFile(file);
   frameRate(60);
   
   surface.setResizable(true);
@@ -33,20 +34,20 @@ void setup()
   arduino.pinMode(3,0);
   arduino.pinMode(4,0);*/
 }
-
 void fileSelected(File selection) {
   if (selection == null) {
     println("Window was closed or the user hit cancel.");
     exit();
   } else {
     println("User selected " + selection.getAbsolutePath());
-     player = minim.loadFile(selection.getAbsolutePath());
+    player = minim.loadFile(selection.getAbsolutePath());
   }
 }
 
+
 void draw()
 {
-  if (player!=null){
+  if(player!=null){
   if(keyPressed!=true){
    for(int i=0;i<3;i++){
       back[i]=255*player.right.level()*1.5;
@@ -149,8 +150,8 @@ void draw()
  /* strokeWeight(5);
   stroke(0,200,0);
   line(posx, 0, posx, height);*/
-  
   }
+  
 }
 
 void keyPressed()
