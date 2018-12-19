@@ -7,7 +7,7 @@ AudioPlayer player;
 int blue;
 float[] back= new float [3];
 int cols, rows;
-int scl=30;
+int scl=35;
 int w=int(1920*1.5);
 int h=int(900);
 float flying=0;;
@@ -97,7 +97,7 @@ void draw()
   }
   pushMatrix();
   //background (0);
-  stroke(255-blue/2,150+blue/2,6+blue/2);
+  stroke(255-blue/2,150+blue,6+blue/3);
   noFill();
   strokeWeight(2);
   translate(width/2,height/2+500);
@@ -115,7 +115,7 @@ void draw()
   popMatrix();
   pushMatrix();
   strokeWeight(2);
-  stroke(255-blue/2,0+blue/2,0+blue/2);
+  stroke(255-blue*1.8,0,0+blue*1.8);
   translate(width/2,height/2-500);
   rotateX(PI/1.6);
   translate(-w/2,-h/2);
@@ -137,15 +137,29 @@ void draw()
   //text(player.left.level(),700,100);
   strokeWeight(3);
   lights();
+  pushMatrix();
   translate(width/2,height/2);
   noFill();
   float rot = map(player.position(), 0, player.length(), 0, TWO_PI);
-  rotateY(rot);
+  rotateY(-rot);
   rotateX(rot);
   
-  box(width/2*player.right.level());
+  box(width/2*(player.right.level()+player.left.level())/2);
   
-  
+  popMatrix();
+  pushMatrix();
+  translate(width*0.25,height*0.5);
+  rotateY(rot);
+  rotateZ(rot);
+  box(width/2*player.right.level()*0.3);
+  popMatrix();
+
+  pushMatrix();
+  translate(width*0.75,height*0.5);
+  rotateY(-rot);
+  rotateZ(-rot);
+  box(width/2*player.left.level()*0.3);
+  popMatrix();
   //ellipse(width/2, height/2,height*player.left.level(),width*player.right.level());
   // draw a line to show where in the song playback is currently located
  
@@ -162,15 +176,16 @@ void keyPressed()
   {
     player.pause();
   }
-  else if ( player.position() == player.length() )
-  {
-    player.rewind();
-    player.play();
-  }
   else if(player.isPlaying()==false&&key=='p')
   {
     player.play();
   }
+  if ( player.position() == player.length()&&key=='p' )
+  {
+    player.rewind();
+    player.play();
+  }
+  
   switch(key){
     default:
     for(int i=0;i<3;i++){
