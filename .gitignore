@@ -1,1 +1,5 @@
 *.mp3
+AndroidManifest.xml
+application.windows32/
+application.windows64/
+code/
