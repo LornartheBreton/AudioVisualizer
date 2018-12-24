@@ -140,7 +140,7 @@ void visualizer(){
       player.play();
      }
     }/*else if(currentSong+1>=files.length){
-      
+       *
       exit();
     }*/
 }
