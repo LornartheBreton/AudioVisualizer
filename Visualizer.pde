@@ -121,7 +121,7 @@ void visualizer(){
     print(player.position());
     print ("---");
     println(cPP);
-    if(player.position()==cPP&&cPP!=0&&player.position()!=0&&player.isPlaying()){
+    if(player.position()==cPP&&cPP!=0&&player.position()!=0&&pauseState==false){
       samePP++;
     }else{
       cPP=player.position();

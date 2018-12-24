@@ -6,6 +6,7 @@ import ddf.minim.*;
 Minim minim;
 AudioPlayer player;
 ControlP5 cp5;
+boolean pauseState=false;
 int samePP=0;
 int cPP;
 int currentSong=0;
@@ -93,10 +94,12 @@ void keyPressed()
   if ( player.isPlaying() && key=='p' )
   {
     player.pause();
+    pauseState=true;
   }
   else if(player.isPlaying()==false&&key=='p')
   {
     player.play();
+    pauseState=false;
   }
   /*if ( player.position() == player.length()&&key=='p' )
   {
