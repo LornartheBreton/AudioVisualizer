@@ -132,7 +132,7 @@ void visualizer(){
       
       samePP=0;
       currentSong++;
-      if(currentSong==files.length){
+      if(currentSong>=files.length){
         exit();
       }else{
       player=minim.loadFile(files[currentSong].getAbsolutePath());
